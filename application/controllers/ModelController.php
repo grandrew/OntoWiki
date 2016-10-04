@@ -511,6 +511,10 @@ class ModelController extends OntoWiki_Controller_Base
                 );
                 $this->view->errorFlag = true;
                 return;
+            } else if (substr($newModelUri, 7) != 'http') {
+                $this->_owApp->appendMessage(
+                    new OntoWiki_Message('The given String is no legal URI (http://...)', OntoWiki_Message::ERROR)
+                );
             } else {
                 // model does not exist, will be created
                 $model = $store->getNewModel(
